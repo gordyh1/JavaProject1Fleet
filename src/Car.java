@@ -1,4 +1,8 @@
-
+/*
+ * Name : Gordon Hendry
+ * Course: CSC 151 0002
+ * Assignment: Final Project
+ */
 public class Car {
  
  private String identifier;
@@ -115,7 +119,7 @@ public void addFuel(int fuel) {
  
  
  public String toString() {
-  return "Car [identifier=" + identifier + ", milage=" + milage + ", fuelUsed=" + fuelUsed + "]";
+  return "Car [identifier=" + identifier + ", mileage=" + milage + ", fuelUsed=" + fuelUsed + ", cost= " + cost + ", year" + year + "]";
  }
 
 }

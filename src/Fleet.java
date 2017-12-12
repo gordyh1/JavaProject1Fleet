@@ -1,11 +1,20 @@
+/*
+ * Name : Gordon Hendry
+ * Course: CSC 151 0002
+ * Assignment: Final Project
+ */
+
 import java.util.ArrayList;
 import java.text.*;
 import java.util.Arrays;
+
+
 
 public class Fleet extends Car {
 
 	private ArrayList<Car> myCars;
 
+	//Constructor creates empty Fleet
 	public Fleet() {
 		myCars = new ArrayList<>();
 	}
@@ -19,14 +28,17 @@ public class Fleet extends Car {
 		return null;
 	}
 
+	//Add cars to the Fleet
 	public boolean add(Car carToAdd) {
 		return myCars.add(carToAdd);
 	}
 
+	//Returns size of Fleet
 	public int size() {
 		return myCars.size();
 	}
 
+	//Returns car at given index
 	public Car get(int position) {
 		return myCars.get(position);
 	}
@@ -101,6 +113,19 @@ public class Fleet extends Car {
 		return newList;
 	}
 	
+	public String getSortedByMPGString() {
+		ArrayList<Car> newList = new ArrayList<>(myCars);
+		
+		selectionSortMPG(newList);
+		String s = "Fleet [\n";
+		for (Car c : newList) {
+			s += c.toString() + "\n";
+		}
+		s += "] \n";
+		return s;
+		
+	}
+	
 	private void selectionSortYear(ArrayList<Car> list) {
 		for (int i = 0; i < list.size() - 1; i++) {
 			// Find the minimum in the list[i..list.length-1]
@@ -143,55 +168,93 @@ public class Fleet extends Car {
 		}
 	}
 	
+	private void selectionSortMileage(ArrayList<Car> list) {
+		 
+			for (int i = 0; i < list.size() - 1; i++) {
+				// Find the minimum in the list[i..list.length-1]
+				Car currentMin = list.get(i);
+				int currentMinIndex = i;
+
+				for (int j = i + 1; j < list.size(); j++) {
+					if (currentMin.getMiles() > list.get(j).getMiles()) {
+						currentMin = list.get(j);
+						currentMinIndex = j;
+					}
+				}
+
+				// Swap list[i] with list[currentMinIndex] if necessary;
+				if (currentMinIndex != i) {
+					list.set(currentMinIndex, list.get(i));
+					list.set(i, currentMin);
+				}
+			}
+		}
+	
+	
 	public ArrayList<Car> getSortedByCost() {
 		ArrayList<Car> newList = new ArrayList<Car>(myCars);
 		selectionSortCost(newList);
 		return newList;
 	}
 	
+	public String getSortedByCostString() {
+		ArrayList<Car> newList = new ArrayList<>(myCars);
+		selectionSortCost(newList);
+		String s = "Fleet [\n";
+		for (Car c : newList) {
+			s += c.toString() + "\n";
+		}
+		s += "] \n";
+		return s;
+		
+	}
+	
+	//Utilize selection sort by year and return the new sorted list
 	public ArrayList<Car> getSortedByYear() {
 		ArrayList<Car> newList = new ArrayList<Car>(myCars);
 		selectionSortYear(newList);
 		return newList;
 	}
 	
+	//Utilize selection sort by year and then iterate over the new list to return ordered string
+	public String getSortedByYearString() {
+		ArrayList<Car> newList = new ArrayList<>(myCars);
+		selectionSortYear(newList);
+		String s = "Fleet [\n";
+		for (Car c : newList) {
+			s += c.toString() + "\n";
+		}
+		s += "] \n";
+		return s;
+		
+	}
 	
-
-
-
+	//Utilize selection sort by mpg method to find the highest mpg
 	public String highestMPG() {
 		ArrayList<Car> newList = new ArrayList<Car>(myCars);
 		selectionSortMPG(newList);
 		Car car1 = newList.get(newList.size() - 1);
 		return car1.getIdentifier();
-
 	}
 
+	//Utilize selection sort by mpg method to find the highest mileage
 	public String highestMileage() {
 		ArrayList<Car> newList = new ArrayList<Car>(myCars);
-		// Use Selection sort on the list to order by MPG. Utilize ArrayList.get method
-		// to get object at given index.
-		for (int i = 0; i < newList.size() - 1; i++) {
-			Car currentMin = (Car) newList.get(i);
-			int currentMinIndex = i;
-
-			for (int j = i + 1; j < newList.size(); j++) {
-				if (currentMin.compareMiles((Car) newList.get(j)) > 0) {
-					currentMin = (Car) newList.get(j);
-					currentMinIndex = j;
-				}
-			}
-			// use ArrayList.set to replace the value at i with the currentMin
-			if (currentMinIndex != i) {
-				newList.set(i, currentMin);
-
-			}
-		}
-
+		selectionSortMileage(newList);
 		Car car1 = newList.get(newList.size() - 1);
 		return car1.getIdentifier();
 	}
 	
+	public String getSortedByMileageString() {
+		ArrayList<Car> newList = new ArrayList<Car>(myCars);
+		selectionSortMileage(newList);
+		String s = "Fleet [\n";
+		for (Car c : newList) {
+			s += c.toString() + "\n";
+		}
+		s += "] \n";
+		return s;
+	}
 	
 
 }
